@@ -1,0 +1,250 @@
+GIT:
+
+Git is a Version Control system
+To trach the history of a project and Collabarate
+
+VCS:
+
+Centralized: single server. ex: teams and subversion
+De-Centralized: Localized servers which can be synchronized. ex: GIT and Mecurial
+
+Why GIT:
+
+Free
+Open Source
+Super Fast
+Scalable
+Cheap Brancing/ Merging
+
+Using GIT:
+
+Command Line 
+IDE : VS (GIT lens)
+GUI : GIT Kranken, Source Tree
+     Limitations
+ 
+GIT Installation:
+
+Teminal --> git --version
+
+GIT Download Link:
+
+
+GIT BASH:
+
+GIT in Command Line
+
+Initial Settings:
+
+Name:
+Email
+Default Editor
+Line Ending
+
+System:All Users
+Global: All Repositories of the current user
+Local: The current repository
+
+Configuration:
+
+git config --global(scope) user.name "user name"
+git config --global user.email emailID
+
+Default Editor:
+
+git config --global core.editor "Code(VS code path)  --wait"
+
+git config --gloabl -e (opens default editor to edit configuration)
+
+End of lines:
+
+\r : carriage return
+\n : line free
+
+windows: CR, LF
+Mac: LF
+
+core.autocrlf
+
+git config --global core.autocrlf true (Windows)
+
+git config --global core.autocrlf input
+(Mac)
+
+GIT help:
+
+git help : git config --help
+space: next page
+q: exit
+
+git config -h
+short summary
+
+Creating Repository:
+
+Create a directory(mkdir)
+go to the directory(cd)
+git init : initializing an empty git repo
+.git: subdirectory that is hidden
+it contains all infor like branches 
+Should not be edited
+
+Note: posh git for better ui
+
+Basic Git workflow:
+
+
+Local --> staging --> Reposirory
+
+changes are sent to stagging area and can be comited is everything is good or can be removed from the stagging area.
+
+git add file name : stagging
+git commit -m "msg" : Repo
+
+Note: once the changes are commited that doesnt mean they are removed from the stagging area.
+
+Git commit information:
+
+Id
+message
+Data/time
+Author
+Complete snapshot of project
+
+Note: compresses the content and doesnt store duplicate content.
+
+git statis: status of working directory in stagging area
+
+git add filename: (to add single file)/ *.txt( to add all files that end with .txt)/  . (to add all files recursively)
+
+git . : be carefull becuause large files can be added recurssively.
+
+Note: git add takes a snapshot of files 
+
+commit: to save the snap shot in repo
+
+got commit -m "" : for shot messages
+
+git commit: a description can be added
+
+Best practices to commit:
+
+Not too small or not too big
+logically seperate (ex: seperate for type and bug fix)
+convention : message in present tense.
+
+Commiting without stagging( beter not to use unless you are sure about the chnages made) :
+
+got commit -a/-am "msg"
+
+-a: all files
+-am: all modified files
+
+Removing files:
+
+git ls-files: files in stagging area
+git add --> git commit ( to remove files from stagging area)
+git rm : to execute all the above steps.
+
+Renaming or moving files:
+
+mv file name new name
+git add: removing old file and adding new file
+git mv: can be used without git add command.
+
+Ignoring Files: to avoid tracking files in git (ex: log files and binary files generated while compiling code)
+
+.gitignore: file names or directories  entered in this are ignored by git
+
+Note: ignored files will not appear in git status because they are ot tracked by git.
+
+Note: doesnt work if the files are commited and then added to .gitignore
+
+Removing files only from the stagging area:
+
+git rm --cached: removes only from index( stagging area)  for once commit
+
+got rm --cached -r: to recursively remove the file from stagging area 
+
+Note: github/gitignore contains templates for ignoring files in different programming languages.
+
+Short status:
+
+git status -s: for short status
+
+Red M: modified files not in stagging area
+Green M: modifies files in stagging area
+MM(red and green): stagged and unstagged changes. 
+??: new file
+A: new files added to stagging area
+
+Viewing stagged and unchanges stages:
+
+git diff --staged: stagged changes in files
+git diff : unstagged cnages in files
+--- : changes in old copy are represnted using thos
++++: changes in new copy are represnted using this.
+@@-old copy(line start, lines extracted)   +new copy (line start, lines extracted)@@: header with info about what parts of file is changed.
+
+Visual Diff tools:
+
+KDiff3
+P4Merge
+WinMerge( only for windows)
+
+VS code as diff tool:
+
+git config --global  diff.tool vscode : to set the diff tool
+git config --global difftool.vscode.cmd "path --wait --diff $LOCAL $REMOTE"
+
+path :path set as system variable
+--wait: wait while using vs code
+--diff: using for diff
+$LOCAL: placeolder for old file
+$REMOTE: place holder for new files
+
+git config --global -e : to open the config file in the editor(In present case VS code)
+git difftool : to open difftool in vs code
+git difftool --staged: for staged changes
+
+History:
+
+git log: to view changes.(name data and desc)
+git log --oneline: one line desc
+git log --oneline --reverse : from fist cto recent commit
+
+Viewing Commit:
+
+git show id
+git show HEAD (head pointer)
+git show HEAD~number to go back
+git show HEAD~n:director: to see the  final version, not differences
+git ls-tree HEAD: to see all folders and files
+
+files are reperesented using blob and folderes as trees.
+
+GIT objects:
+
+commits
+Blobs(files)
+Trees(Directories)
+Tags
+
+Unstage the files:
+
+git restore --staged file names/.
+
+Note:Git restore takes the snapshot of the file as per the last commit.
+
+Discarding the local chnages:
+
+git restore 
+
+The version from staging enviorment is taken and copied into the directory.
+
+git clean : to remove all the files even the untracked files.
+ git clean -fd: to force remove all directories
+
+Restoring the files:
+
+git restore --source=HEAD~1 : to restore file from last commit.
